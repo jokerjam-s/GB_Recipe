@@ -1,6 +1,10 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import View
+from django.views.generic import FormView
+
 from . import forms
 
 
@@ -14,28 +18,20 @@ def start(request):
     return response
 
 
-class Register(View):
+@login_required
+def profile(request):
+    return render(request, 'profile.html')
+
+
+def register_ok(request):
+    return render(request, 'registration/register_ok.html')
+
+
+class Register(FormView):
+    form_class = forms.UserCreateForm
     template_name = 'registration/register.html'
+    success_url = reverse_lazy('register_ok')
 
-    def get(self, request):
-        context = {
-            'form': forms.UserCreateForm()
-        }
-        return render(request, self.template_name, context)
-
-    def post(self, request):
-        form = forms.UserCreateForm(request.POST)
-
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            return redirect('index/')
-
-        context = {
-            'form': form
-        }
-
-        return render(request, self.template_name, context)
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
