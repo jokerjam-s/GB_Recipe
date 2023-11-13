@@ -6,6 +6,7 @@ from django.views import View
 from django.views.generic import FormView
 
 from . import forms
+from . import models
 
 
 # Create your views here.
@@ -25,6 +26,32 @@ def profile(request):
 
 def register_ok(request):
     return render(request, 'registration/register_ok.html')
+
+
+def recipe_add(request):
+    """
+    Добавление рецепта.
+    :param request:
+    :return:
+    """
+    if request.method == "POST":
+        form = forms.RecipeAdd(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
+            ingredients = form.cleaned_data['ingredients']
+            steps = form.cleaned_data['steps']
+            time_cook = form.cleaned_data['time_cook']
+            photo = form.cleaned_data['photo']
+    else:
+        form = forms.RecipeAdd()
+
+    return render(request, 'recipe_add.html', {'form': form})
+
+
+@login_required
+def recipes(request):
+    return render(request, 'recipes.html')
 
 
 class Register(FormView):
