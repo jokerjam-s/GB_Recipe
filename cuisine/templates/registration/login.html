@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="h1 text-center">Авторизация</h1>
+
+    <div class="col-md-6 col-lg-4 m-auto">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-danger alert-dismissible">Ошибка авторизации. Попробуйте еще раз.</div>
+            {% endif %}
+
+            <div class="mb-2">
+                <label class="form-label" for="id_username">Логин</label>
+                <input class="form-control" type="text" name="username" maxlength="150" required="" id="id_username">
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label" for="id_password">Пароль</label>
+                <input class="form-control" type="password" name="password" required="" id="id_password">
+            </div>
+
+            <button class="btn btn-success" type="submit">Вход</button> &nbsp;
+            <a class="btn btn-primary" href="{% url 'register' %}">Регистрация</a>
+        </form>
+    </div>
+
+
+{% endblock %}
