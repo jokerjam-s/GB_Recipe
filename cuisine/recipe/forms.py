@@ -14,9 +14,12 @@ class RecipeAdd(forms.Form):
     """
     Добавление рецепта.
     """
+    categories = models.Category.objects.all()
+
     title = forms.CharField(max_length=150)
     description = forms.CharField(required=False)
     ingredients = forms.CharField(required=False)
     steps = forms.CharField(max_length=500)
     time_cook = forms.IntegerField(min_value=1)
     photo = forms.ImageField()
+    categories = forms.MultipleChoiceField(choices=categories)

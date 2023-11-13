@@ -3,5 +3,10 @@
 {% block content %}
 	<h1 class="text-center">Новый рецепт</h1>
 
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <button class="btn btn-success" type="submit">Добавить</button>
+    </form>
 
 {% endblock %}

@@ -19,3 +19,5 @@ https://www.youtube.com/watch?v=ke0f3bKl03w
 https://www.youtube.com/watch?v=5hGIg2h63g0
 
 https://www.geeksforgeeks.org/multiplechoicefield-django-forms/
+
+https://stackoverflow.com/questions/45729063/init-multiplechoicefield-with-queryset
