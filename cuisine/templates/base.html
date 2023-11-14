@@ -8,7 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
 
     <title>Сборник рецептов</title>
 </head>
@@ -37,7 +36,7 @@
                         </li>
                         {% if user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link" href="/list">Мои рецепты</a>
+                                <a class="nav-link" href="{% url 'recipes' %}">Мои рецепты</a>
                             </li>
                         {% endif %}
                     </ul>
@@ -82,7 +81,7 @@
         </nav>
     </section>
 
-    <section>
+    <section style="min-height:65vmin">
         {% block content %}
 
         {% endblock %}

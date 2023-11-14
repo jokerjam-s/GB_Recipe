@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="text-center">Новый рецепт</h1>
+    <div class="col-lg-4 col-md-6 mb-3 ms-auto me-auto">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+
+            <div class="mb-2">
+                <label class="form-label" for="id_title">Название</label>
+                {{ form.title }}
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label" for="id_description">Описание</label>
+                {{ form.description }}
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Ингредиенты</label>
+                {{ form.ingredients }}
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Приготовление</label>
+                {{ form.steps }}
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Время приготовления</label>
+                {{ form.time_cook }}
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Категории</label>
+                {{ form.categories }}
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Изображение</label>
+                {{ form.photo }}
+            </div>
+
+            <button class="btn btn-success" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-floppy2-fill" viewBox="0 0 16 16">
+                    <path d="M12 2h-2v3h2V2Z"/>
+                    <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v13A1.5 1.5 0 0 0 1.5 16h13a1.5 1.5 0 0 0 1.5-1.5V2.914a1.5 1.5 0 0 0-.44-1.06L14.147.439A1.5 1.5 0 0 0 13.086 0H1.5ZM4 6a1 1 0 0 1-1-1V1h10v4a1 1 0 0 1-1 1H4ZM3 9h10a1 1 0 0 1 1 1v5H2v-5a1 1 0 0 1 1-1Z"/>
+                </svg>
+                Сохранить
+            </button>
+        </form>
+    </div>
+
+{% endblock %}

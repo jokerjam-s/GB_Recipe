@@ -1,0 +1,82 @@
+[
+{
+     "model": "recipe.category",
+     "pk": 1,
+     "fields": {
+          "name": "Холодные закуски ",
+          "recipes": []
+     }
+},
+{
+     "model": "recipe.category",
+     "pk": 2,
+     "fields": {
+          "name": "Горячие закуски",
+          "recipes": []
+     }
+},
+{
+     "model": "recipe.category",
+     "pk": 3,
+     "fields": {
+          "name": "Супы",
+          "recipes": []
+     }
+},
+{
+     "model": "recipe.category",
+     "pk": 4,
+     "fields": {
+          "name": "Первые блюда",
+          "recipes": []
+     }
+},
+{
+     "model": "recipe.category",
+     "pk": 5,
+     "fields": {
+          "name": "Гарниры",
+          "recipes": []
+     }
+},
+{
+     "model": "recipe.category",
+     "pk": 6,
+     "fields": {
+          "name": "Мясные блюда",
+          "recipes": []
+     }
+},
+{
+     "model": "recipe.category",
+     "pk": 7,
+     "fields": {
+          "name": "Салаты",
+          "recipes": []
+     }
+},
+{
+     "model": "recipe.category",
+     "pk": 8,
+     "fields": {
+          "name": "Вегетарианские блюда",
+          "recipes": []
+     }
+},
+{
+     "model": "recipe.category",
+     "pk": 9,
+     "fields": {
+          "name": "Десерты",
+          "recipes": []
+     }
+},
+{
+     "model": "recipe.category",
+     "pk": 10,
+     "fields": {
+          "name": "Напитки",
+          "recipes": []
+     }
+}
+]

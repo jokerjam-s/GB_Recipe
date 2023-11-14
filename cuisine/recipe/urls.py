@@ -8,4 +8,6 @@ urlpatterns = [
     path("register/", views.Register.as_view(), name="register"),
     path("register_ok/", views.register_ok, name="register_ok"),
     path("profile/", views.profile, name="profile"),
+    path("recipes/add/", views.recipe_add, name="recipe_add"),
+    path("recipes/", views.recipes, name="recipes"),
 ]
