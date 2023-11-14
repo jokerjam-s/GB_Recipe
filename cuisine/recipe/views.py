@@ -69,6 +69,9 @@ def recipe_add(request):
 
 @login_required
 def recipes(request):
+    recipes = models.Recipe.object.filter(user=request.user)
+    # todo: Вывод списка пользовательских рецептов, добавить пагинацию
+
     return render(request, 'recipes.html')
 
 
