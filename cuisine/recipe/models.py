@@ -21,6 +21,7 @@ class Recipe(models.Model):
     steps = models.CharField(max_length=500)
     time_cook = models.IntegerField(default=1, validators=[MinValueValidator(0)])
     photo = models.ImageField(upload_to='media/', null=True, default=None)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['title']
@@ -35,6 +36,9 @@ class Category(models.Model):
     """
     name = models.CharField(max_length=50)
     recipes = models.ManyToManyField(Recipe)
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         ordering = ['name']

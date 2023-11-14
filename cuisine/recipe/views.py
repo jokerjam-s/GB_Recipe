@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -28,6 +29,7 @@ def register_ok(request):
     return render(request, 'registration/register_ok.html')
 
 
+@login_required
 def recipe_add(request):
     """
     Добавление рецепта.
@@ -35,14 +37,30 @@ def recipe_add(request):
     :return:
     """
     if request.method == "POST":
-        form = forms.RecipeAdd(request.POST)
+        form = forms.RecipeAdd(request.POST, request.FILES)
         if form.is_valid():
-            title = form.cleaned_data['title']
-            description = form.cleaned_data['description']
-            ingredients = form.cleaned_data['ingredients']
-            steps = form.cleaned_data['steps']
-            time_cook = form.cleaned_data['time_cook']
-            photo = form.cleaned_data['photo']
+            image = form.cleaned_data['photo']
+            file = FileSystemStorage()
+            file_name = file.get_available_name(image.name) if file.exists(image.name) else image.name
+            file.save(file_name, image)
+
+            categories = form.cleaned_data['categories']
+            recipe = models.Recipe(
+                title=form.cleaned_data['title'],
+                description=form.cleaned_data['description'],
+                ingredients=form.cleaned_data['ingredients'],
+                steps=form.cleaned_data['steps'],
+                time_cook=form.cleaned_data['time_cook'],
+                photo=file_name,
+                user=request.user
+            )
+
+            recipe.save()
+            for category in categories:
+                category.recipes.add(recipe)
+                category.save()
+
+            return redirect(to='recipes')
     else:
         form = forms.RecipeAdd()
 
