@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ recipe.title }}</h1>
+
+    <div class="card mb-3" style="max-width: 100%;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ recipe.photo.url }}" class="card-img-top" alt="..." width="400px">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="Описание">Описание</h5>
+                    <p class="card-text">{{ recipe.description }}</p>
+                    <h5 class="Описание">Ингредиенты</h5>
+                    <p class="card-text">{{ recipe.ingredients }}</p>
+                    <h5 class="Описание">Приготовление</h5>
+                    <p class="card-text">{{ recipe.steps }}</p>
+                    <p class="card-text">Время на приготовление: <span
+                            class="fw-bold">{{ recipe.time_cook }} мин.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

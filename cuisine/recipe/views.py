@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 
@@ -79,6 +79,12 @@ def recipes(request):
         recipes_on_page = paginator.page(paginator.num_pages)
 
     return render(request, 'recipes.html', {'page': page, 'recipes': recipes_on_page})
+
+
+# @login_required
+def recipe_view(request, recipe_id):
+    recipe = get_object_or_404(models.Recipe, pk=recipe_id)
+    return render(request, "recipe_view.html", {"recipe": recipe})
 
 
 class Register(FormView):

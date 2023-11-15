@@ -21,7 +21,7 @@ sdist/
 var/
 wheels/
 share/python-wheels/
-media/
+cuisine/media/
 *.egg-info/
 .installed.cfg
 *.egg

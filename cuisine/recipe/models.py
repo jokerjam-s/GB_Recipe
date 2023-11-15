@@ -8,6 +8,7 @@ class User(AbstractUser):
     """
     Пользователь системы
     """
+
     def __str__(self):
         return self.username
 
@@ -21,7 +22,7 @@ class Recipe(models.Model):
     ingredients = models.TextField(null=True, default=None)
     steps = models.CharField(max_length=500)
     time_cook = models.IntegerField(default=1, validators=[MinValueValidator(0)])
-    photo = models.ImageField(upload_to='media/', null=True, default=None)
+    photo = models.ImageField(upload_to='img/', null=True, default=None)  # upload_to='img/',
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:

@@ -25,4 +25,4 @@ class RecipeAdd(forms.Form):
     time_cook = forms.IntegerField(min_value=1, widget=forms.NumberInput(attrs={'class': 'form-control', }))
     categories = forms.ModelMultipleChoiceField(queryset=categories_data, required=True, to_field_name="id",
                                                 widget=forms.CheckboxSelectMultiple())
-    photo = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}))
+    photo = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'},))

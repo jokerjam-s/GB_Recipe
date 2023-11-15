@@ -13,10 +13,10 @@
 </head>
 <body>
 
-<div class="container-xxl">
+<div class="container-lg">
 
     <section class="fixed-top">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light container-lg">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -81,20 +81,18 @@
         </nav>
     </section>
 
-    <section style="min-height:65vmin; position: absolute; padding: 75px 0 100px; width: 96vw">
+    <section style="padding: 75px 0 100px; width: 96%">
         {% block content %}
 
         {% endblock %}
     </section>
 
 
-    <footer class="fixed-bottom bg-light">
-        <div class=">
-            <div class="row">
-                <div class="col m-4">
-                    <h6>Книга рецептов</h6>
-                    <p><a href="https://gb.ru">GeekBrains</a> - итоговый тест, &copy; 2023. Сапунов А.</p>
-                </div>
+    <footer class="fixed-bottom bg-light container-lg">
+        <div class="row">
+            <div class="col m-4">
+                <h6>Книга рецептов</h6>
+                <p><a href="https://gb.ru">GeekBrains</a> - итоговый тест, &copy; 2023. Сапунов А.</p>
             </div>
         </div>
     </footer>
