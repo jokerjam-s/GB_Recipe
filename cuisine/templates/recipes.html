@@ -35,7 +35,7 @@
                     <tr>
 
                         <td>
-                            <a class="link-secondary " href="/">
+                            <a class="link-secondary " href="{% url 'recipe_view' recipe_id=recipe.id %}">
                                 {{ recipe.title }}
                             </a>
                         </td>
