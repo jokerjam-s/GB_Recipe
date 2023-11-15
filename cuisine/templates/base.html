@@ -15,7 +15,7 @@
 
 <div class="container-xxl">
 
-    <section>
+    <section class="fixed-top">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/">
@@ -81,14 +81,15 @@
         </nav>
     </section>
 
-    <section style="min-height:65vmin">
+    <section style="min-height:65vmin; position: absolute; padding: 75px 0 100px; width: 96vw">
         {% block content %}
 
         {% endblock %}
     </section>
 
-    <footer>
-        <div class="container-xxl bg-light">
+
+    <footer class="fixed-bottom bg-light">
+        <div class=">
             <div class="row">
                 <div class="col m-4">
                     <h6>Книга рецептов</h6>

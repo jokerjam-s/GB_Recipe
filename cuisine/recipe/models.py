@@ -8,7 +8,8 @@ class User(AbstractUser):
     """
     Пользователь системы
     """
-    ...
+    def __str__(self):
+        return self.username
 
 
 class Recipe(models.Model):

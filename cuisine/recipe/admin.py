@@ -9,13 +9,13 @@ from . import models
 
 @admin.register(models.User)
 class CustomUserAdmin(UserAdmin):
-    list_display = ('username', 'email', 'is_staff')
-    search_fields = ('username', 'name', 'email')
+    list_display = ('username', 'email', 'is_staff', )
+    search_fields = ('username', 'name', 'email',)
 
 
 @admin.register(models.Recipe)
 class RecipeAdmin(ModelAdmin):
-    list_display = ('title', 'description', 'ingredients')
+    list_display = ('title', 'description', 'ingredients', 'user',)
     search_fields = ('title',)
 
 
