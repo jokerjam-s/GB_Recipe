@@ -68,6 +68,11 @@ def recipe_add(request):
 
 @login_required
 def recipes(request):
+    """
+    Просмотр списка рецептов пользователя.
+    :param request:
+    :return:
+    """
     recipes_list = models.Recipe.objects.filter(user=request.user)
     paginator = Paginator(recipes_list, 15)
     page = request.GET.get('page')
@@ -85,6 +90,22 @@ def recipes(request):
 def recipe_view(request, recipe_id):
     recipe = get_object_or_404(models.Recipe, pk=recipe_id)
     return render(request, "recipe_view.html", {"recipe": recipe})
+
+
+@login_required
+def recipe_del(request):
+    """
+    Удаление рецепта.
+    :param request:
+    :return:
+    """
+    if request.method == 'POST':
+        form = forms.RecipeDel(request.POST)
+        if form.is_valid():
+            recipe_id = form.cleaned_data['recipe_id']
+            models.Recipe.objects.filter(pk=recipe_id).delete()
+
+    return redirect(to='recipes')
 
 
 class Register(FormView):

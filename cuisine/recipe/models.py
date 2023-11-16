@@ -20,7 +20,7 @@ class Recipe(models.Model):
     title = models.CharField(max_length=150, null=False)
     description = models.TextField(null=True, default=None)
     ingredients = models.TextField(null=True, default=None)
-    steps = models.CharField(max_length=500)
+    steps = models.TextField()
     time_cook = models.IntegerField(default=1, validators=[MinValueValidator(0)])
     photo = models.ImageField(upload_to='img/', null=True, default=None)  # upload_to='img/',
     user = models.ForeignKey(User, on_delete=models.CASCADE)
