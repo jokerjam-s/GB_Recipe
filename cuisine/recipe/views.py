@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -11,7 +13,8 @@ from . import models
 
 # Create your views here.
 def index(request):
-    return render(request, "index.html")
+    recipes = random.choices(models.Recipe.objects.all(), k=6)
+    return render(request, "index.html", {'recipes': recipes})
 
 
 def start(request):

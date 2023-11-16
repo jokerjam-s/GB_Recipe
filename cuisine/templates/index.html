@@ -2,7 +2,25 @@
 
 {% block content %}
     <h1 class="h1 text-center">Книга рецептов</h1>
+    <hr class="mb-3">
 
-
+    <div class="row row-cols-1 row-cols-md-3 g-4 pb-5">
+        {% for recipe in recipes %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{ recipe.photo.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ recipe.title }}</h5>
+                        <p class="card-text">{{ recipe.description | truncatechars:150 }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            <a class="link-secondary" href="{% url 'recipe_view' recipe_id=recipe.id %}">Подробнее...</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}
