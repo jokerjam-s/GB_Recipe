@@ -89,7 +89,8 @@ def recipes(request):
 # @login_required
 def recipe_view(request, recipe_id):
     recipe = get_object_or_404(models.Recipe, pk=recipe_id)
-    return render(request, "recipe_view.html", {"recipe": recipe})
+    categories = models.Category.objects.filter(recipes__id=recipe_id)
+    return render(request, "recipe_view.html", {"recipe": recipe, 'categories': categories})
 
 
 @login_required

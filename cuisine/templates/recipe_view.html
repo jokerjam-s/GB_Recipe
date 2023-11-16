@@ -19,6 +19,12 @@
                     <p class="card-text">Время на приготовление: <span
                             class="fw-bold">{{ recipe.time_cook }} </span>мин.
                     </p>
+                    <p class="card-text "><small><strong>Категории</strong>:
+                        {% for category in categories %}
+                            {{ category }},
+                        {% endfor %}
+                    </small>
+                    </p>
                 </div>
             </div>
         </div>
