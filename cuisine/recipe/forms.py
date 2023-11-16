@@ -28,5 +28,9 @@ class RecipeAdd(forms.Form):
     photo = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}, ))
 
 
+class RecipeEdit(RecipeAdd):
+    id = forms.IntegerField(widget=forms.HiddenInput())
+
+
 class RecipeDel(forms.Form):
     recipe_id = forms.IntegerField(widget=forms.HiddenInput())
