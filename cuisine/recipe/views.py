@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -11,7 +13,8 @@ from . import models
 
 # Create your views here.
 def index(request):
-    return render(request, "index.html")
+    recipes = random.choices(models.Recipe.objects.all(), k=6)
+    return render(request, "index.html", {'recipes': recipes})
 
 
 def start(request):
@@ -89,7 +92,8 @@ def recipes(request):
 # @login_required
 def recipe_view(request, recipe_id):
     recipe = get_object_or_404(models.Recipe, pk=recipe_id)
-    return render(request, "recipe_view.html", {"recipe": recipe})
+    categories = models.Category.objects.filter(recipes__id=recipe_id)
+    return render(request, "recipe_view.html", {"recipe": recipe, 'categories': categories})
 
 
 @login_required
