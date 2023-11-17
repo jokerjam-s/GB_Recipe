@@ -13,6 +13,24 @@ class User(AbstractUser):
         return self.username
 
 
+class Category(models.Model):
+    """
+    Категория рецепта.
+    """
+    name = models.CharField(max_length=50)
+
+    # recipes = models.ManyToManyField(Recipe)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
+        indexes = [
+            models.Index(fields=['name']),
+        ]
+
+
 class Recipe(models.Model):
     """
     Рецепт.
@@ -24,26 +42,10 @@ class Recipe(models.Model):
     time_cook = models.IntegerField(default=1, validators=[MinValueValidator(0)])
     photo = models.ImageField(upload_to='img/', null=True, default=None)  # upload_to='img/',
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    categories = models.ManyToManyField(Category)
 
     class Meta:
         ordering = ['title']
         indexes = [
             models.Index(fields=['title']),
-        ]
-
-
-class Category(models.Model):
-    """
-    Категория рецепта.
-    """
-    name = models.CharField(max_length=50)
-    recipes = models.ManyToManyField(Recipe)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        ordering = ['name']
-        indexes = [
-            models.Index(fields=['name']),
         ]

@@ -56,17 +56,34 @@ def recipe_add(request):
                 photo=file_name,
                 user=request.user
             )
-
             recipe.save()
             for category in categories:
-                category.recipes.add(recipe)
-                category.save()
-
-            return redirect(to='recipes')
+                recipe.categories.add(category)
+        return redirect(to='recipes')
     else:
         form = forms.RecipeAdd()
 
     return render(request, 'recipe_add.html', {'form': form})
+
+
+@login_required
+def recipe_edit(request, recipe_id):
+    recipe = get_object_or_404(models.Recipe, pk=recipe_id)
+    if request.method == 'POST':
+        form = forms.RecipeEdit(request.POST, request.FILES, instance=recipe)
+        if form.is_valid():
+            recipe = form.save(commit=False)
+            categories = form.cleaned_data['categories']
+            recipe.categories.clear()
+            for category in categories:
+                recipe.categories.add(category)
+            recipe.save()
+
+        return redirect(to='recipes')
+    else:
+        form = forms.RecipeEdit(instance=recipe)
+
+    return render(request, 'recipe_edit.html', {'form': form})
 
 
 @login_required
@@ -92,8 +109,8 @@ def recipes(request):
 # @login_required
 def recipe_view(request, recipe_id):
     recipe = get_object_or_404(models.Recipe, pk=recipe_id)
-    categories = models.Category.objects.filter(recipes__id=recipe_id)
-    return render(request, "recipe_view.html", {"recipe": recipe, 'categories': categories})
+    # recipe.categories.all()
+    return render(request, "recipe_view.html", {"recipe": recipe})
 
 
 @login_required
