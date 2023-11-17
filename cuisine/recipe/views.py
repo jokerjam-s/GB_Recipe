@@ -70,12 +70,12 @@ def recipe_add(request):
 
 
 @login_required
-def recipe_edit(request, recipe_id):
-    recipe = get_object_or_404(models.Recipe, pk=recipe_id)
+def recipe_edit(request, recipe_id=0):
     if request.method == 'POST':
         form = forms.RecipeEdit(request.POST, request.FILES)
         if form.is_valid():
             id = form.cleaned_data["id"]
+            recipe = get_object_or_404(models.Recipe, pk=recipe_id)
             if recipe_id == id:
                 image = form.cleaned_data['photo']
                 file = FileSystemStorage()
@@ -98,18 +98,24 @@ def recipe_edit(request, recipe_id):
                     category.save()
 
             return redirect(to='recipes')
-        else:
-            form = forms.RecipeEdit()
-            form.id = recipe.pk
-            form.title = recipe.title
-            form.ingredients = recipe.ingredients
-            form.description = recipe.description
-            form.steps = recipe.steps
-            form.time_cook = recipe.time_cook
-            form.photo = recipe.photo
-            form.categories = models.Category.objects.filter(recipe__id=recipe_id)
+    else:
+        recipe = get_object_or_404(models.Recipe, pk=recipe_id)
 
-            return render(request, 'recipe_edit.html', {'form': form})
+        print(recipe)
+
+        form = forms.RecipeEdit(instance=recipe)
+        # form.id = recipe.pk
+        # form.title = recipe.title
+        # form.ingredients = recipe.ingredients
+        # form.description = recipe.description
+        # form.steps = recipe.steps
+        # form.time_cook = recipe.time_cook
+        # form.photo = recipe.photo
+        # form.categories = models.Category.objects.filter(recipes__id=recipe_id)
+
+        print(form.__dict__)
+
+        return render(request, 'recipe_edit.html', {'form': form})
 
 
 @login_required

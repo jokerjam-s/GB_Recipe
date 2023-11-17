@@ -28,8 +28,24 @@ class RecipeAdd(forms.Form):
     photo = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}, ))
 
 
-class RecipeEdit(RecipeAdd):
+class RecipeEdit(forms.ModelForm):
     id = forms.IntegerField(widget=forms.HiddenInput())
+    categories_data = models.Category.objects.all()
+
+    title = forms.CharField(max_length=150, required=True, widget=forms.TextInput(attrs={'class': 'form-control', }))
+    description = forms.CharField(required=False,
+                                  widget=forms.Textarea(attrs={'rows': 2, 'class': 'form-control', }))
+    ingredients = forms.CharField(required=True,
+                                  widget=forms.Textarea(attrs={'rows': 5, 'class': 'form-control', }))
+    steps = forms.CharField(required=True, widget=forms.Textarea(attrs={'rows': 5, 'class': 'form-control', }))
+    time_cook = forms.IntegerField(min_value=1, widget=forms.NumberInput(attrs={'class': 'form-control', }))
+    categories = forms.ModelMultipleChoiceField(queryset=categories_data, required=True, to_field_name="id",
+                                                widget=forms.CheckboxSelectMultiple())
+    photo = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class': 'form-control'}, ))
+
+    class Meta:
+        model = models.Recipe
+        fields = ('title', 'description', 'ingredients', 'steps', 'time_cook', 'categories', 'photo',)
 
 
 class RecipeDel(forms.Form):
