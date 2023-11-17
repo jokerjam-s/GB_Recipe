@@ -20,7 +20,7 @@
                             class="fw-bold">{{ recipe.time_cook }} </span>мин.
                     </p>
                     <p class="card-text "><small><strong>Категории</strong>:
-                        {% for category in categories %}
+                        {% for category in recipe.categories.all %}
                             {{ category }},
                         {% endfor %}
                     </small>
