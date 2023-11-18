@@ -13,7 +13,9 @@ from . import models
 
 # Create your views here.
 def index(request):
-    recipes = random.choices(models.Recipe.objects.all(), k=6)
+    recipes = models.Recipe.objects.all()
+    if len(recipes) > 0:
+        recipes = random.choices(recipes, k=6)
     return render(request, "index.html", {'recipes': recipes})
 
 
